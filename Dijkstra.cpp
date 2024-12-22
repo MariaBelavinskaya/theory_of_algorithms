@@ -3,8 +3,8 @@
 #include <limits>
 #include <utility>
 #include <string>
-#include <locale> // Добавлено для поддержки русской кодировки
-#include <codecvt> // Добавлено для поддержки русской кодировки
+#include <locale> 
+#include <codecvt>
 
 using namespace std;
 
@@ -43,7 +43,6 @@ void dijkstra(int start, const vector<vector<pair<int, int>>>& graph) {
 }
 
 int main() {
-    // Установка локали для поддержки русского языка
     setlocale(LC_ALL, "Russian");
 
     int n, m;
