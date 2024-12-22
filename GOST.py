@@ -4,7 +4,7 @@ import math as mt
 def test_ferma(n, t):
     for i in range(t):
         a = randint(2, n - 2)
-        r = pow(a, n - 1, n)  # Используем модульное возведение в степень
+        r = pow(a, n - 1, n)  
         if r != 1:
             return False
     return True
@@ -20,7 +20,7 @@ def Jacobi(a, n):
     if a % 2 == 0:
         while a1 % 2 == 0:
             k += 1
-            a1 //= 2  # Исправлено на целочисленное деление
+            a1 //= 2 
     if k % 2 == 0:
         s = 1
     elif n % 8 == 1 or n % 8 == 7:
@@ -37,7 +37,7 @@ def Jacobi(a, n):
 def test_solovey_shtrassen(n, t):
     for i in range(t):
         a = randint(2, n - 2)
-        r = pow(a, (n - 1) // 2, n)  # Используем модульное возведение в степень
+        r = pow(a, (n - 1) // 2, n) 
         if r != 1 and r != n - 1:
             return False
         s = Jacobi(a, n)
@@ -59,11 +59,11 @@ def test_miller_rabin(n, t):
         r //= 2
     for _ in range(t):
         b = randint(2, n - 2)
-        y = pow(b, r, n)  # Используем модульное возведение в степень
+        y = pow(b, r, n)  
         if y != 1 and y != n - 1:
             j = 1
             while j < s and y != n - 1:
-                y = pow(y, 2, n)  # Используем модульное возведение в степень
+                y = pow(y, 2, n)  
                 if y == 1:
                     return False
                 j += 1
@@ -88,7 +88,7 @@ def gost_alg(t, q):
             p = q * (N + u) + 1
             if p > pow(2, t):
                 break
-            if pow(2, p - 1, p) == 1 and pow(2, N + u, p) != 1:  # Используем модульное возведение в степень
+            if pow(2, p - 1, p) == 1 and pow(2, N + u, p) != 1:  
                 return p
             else:
                 u += 2
