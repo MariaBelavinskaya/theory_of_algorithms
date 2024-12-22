@@ -24,7 +24,7 @@ def karatsuba(x, y):
 
 def strassen(A, B):
     n = len(A)
-    if n <= 2:  # Базовый случай: для матриц 1x1 и 2x2 используем обычное умножение
+    if n <= 2:
         C = np.zeros((n, n), dtype=int)
         for i in range(n):
             for j in range(n):
@@ -64,35 +64,35 @@ def strassen(A, B):
     return C
 
 
-# Алгоритм Тома-Кука (Тоом-3)
+
 def toom_cook(x, y):
     if x < 10 or y < 10:
         return x * y
 
-    m = 3  # используем Тоом-3
+    m = 3  
 
-    # Преобразуем числа в списки цифр
+   
     x_digits = [int(d) for d in reversed(str(x))]
     y_digits = [int(d) for d in reversed(str(y))]
 
-    # Дополняем нулями до кратности m
+    
     while len(x_digits) % m != 0:
         x_digits.append(0)
     while len(y_digits) % m != 0:
         y_digits.append(0)
 
-    # Разделяем на подгруппы по m
+    
     x_parts = [sum(digit * (10 ** i) for i, digit in enumerate(x_digits[j:j + m]))
                for j in range(0, len(x_digits), m)]
     y_parts = [sum(digit * (10 ** i) for i, digit in enumerate(y_digits[j:j + m]))
                for j in range(0, len(y_digits), m)]
 
-    # Выравниваем длины списков
+   
     n = max(len(x_parts), len(y_parts))
     x_parts = x_parts + [0] * (n - len(x_parts))
     y_parts = y_parts + [0] * (n - len(y_parts))
 
-    # Вычисляем произведения в точках
+    
     p = [0, 1, -1, 2, float('inf')]
     v = []
 
@@ -101,20 +101,18 @@ def toom_cook(x, y):
         yv = sum(y_part * (px ** i) for i, y_part in enumerate(y_parts))
         v.append(xv * yv)
 
-    # Интерполяция
+
     z0 = v[0]
     z1 = (4 * v[1] - v[2] - 3 * v[0]) / 2
     z2 = (-2 * v[1] + 2 * v[2]) / 2
     z3 = (4 * v[2] - v[1] - 3 * v[3]) / 6
     z4 = (v[1] + v[3] - 2 * v[2]) / 24
 
-    # Комбинируем результаты
+    
     z = sum(int(round(z_i * (10 ** (i * m)))) for i, z_i in enumerate([z0, z1, z2, z3, z4]))
 
     return int(z)
 
-
-# Пример использования
 x = 11
 y = 28
 
